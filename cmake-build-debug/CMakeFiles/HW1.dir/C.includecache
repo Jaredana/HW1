@@ -6,9 +6,15 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/Jared_Dana/Desktop/C Projects/HW1/main.c
+C:/Users/Jared_Dana/Desktop/C Projects/Test/input.h
 stdio.h
 -
 malloc.h
 -
+mem.h
+-
+
+C:/Users/Jared_Dana/Desktop/C Projects/Test/main.c
+input.h
+C:/Users/Jared_Dana/Desktop/C Projects/Test/input.h
 
