@@ -10,6 +10,8 @@ struct ReadMaze
 {
     int Columns;
     int rows;
+    int * start;
+    int * end;
     int * currLine; //I'm gonna read in line by line, sending the data received to the function that will fill the 2d array
 };
 
