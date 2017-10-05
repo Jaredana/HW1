@@ -1,18 +1,30 @@
-
 #include "input.h"
-//Function Declarations
-struct ReadMaze Read_Size(FILE *ptr_file); //Reads in data from the text file and fills the Maze struct and 2D array
-char** Create_Maze(struct ReadMaze my_data); //Used for allocating memory
-struct ReadMaze Copy_data(struct ReadMaze my_data, struct ReadMaze TMaze); //Copy function
-int Destroyer(char** Maze, int Columns, int rows);//For Deallocating, his method didn't work...
-void Display(char** Maze, int Columns, int rows);//Works a little weird
+
+/* FUNCTION DECLARATIONS */
+
+/* Reads in data from the text file and fills the Maze struct and 2D array */
+struct ReadMaze Read_Size(FILE *ptr_file);
+
+/* Used for allocating memory */
+char** Create_Maze(struct ReadMaze my_data);
+
+/* Copy function */
+struct ReadMaze Copy_data(struct ReadMaze my_data, struct ReadMaze TMaze);
+
+/* For Deallocating, his method didn't work... */
+int Destroyer(char** Maze, int Columns, int rows);
+
+/* Works a little weird */
+void Display(char** Maze, int Columns, int rows);
 
 
-int main() {
+
+int main(int argc, char* argv[])
+{
     FILE *ptr_file = fopen("maze2.txt", "r");
     FILE *ptr_file2 = fopen("maze3.txt", "r");
 
-    //Read in Maze Data temp1 is Maze 1 and temp2 is Maze 2
+    /* Read in Maze Data temp1 is Maze 1 and temp2 is Maze 2 */
     struct ReadMaze Maze1, Maze2;
 
     Maze1 = Copy_data(Maze1, Read_Size(ptr_file));
@@ -21,8 +33,7 @@ int main() {
     fclose(ptr_file);
     fclose(ptr_file2);
 
-    //Display(Maze1.MazeData, Maze1.Columns, Maze1.rows);
-
+    /*Display(Maze1.MazeData, Maze1.Columns, Maze1.rows);*/
 
     return 0;
 }
@@ -30,6 +41,8 @@ int main() {
 int Destroyer(char** Maze, int Columns, int rows)
 {
     free(Maze);
+	/* Just needs to return something */
+	return 0;
 }
 
 struct ReadMaze Copy_data(struct ReadMaze Maze, struct ReadMaze TMaze)
@@ -42,20 +55,30 @@ struct ReadMaze Copy_data(struct ReadMaze Maze, struct ReadMaze TMaze)
     return Maze;
 }
 
-struct ReadMaze Read_Size(FILE *ptr_file) {
+struct ReadMaze Read_Size(FILE *ptr_file)
+{
     struct ReadMaze my_data;
     my_data.start = (int*)malloc(sizeof(int) * 5);
     my_data.end = (int*)malloc(sizeof(int)*5);
 
     if (!ptr_file)
     {
-        printf("Oh no! % s\n", strerror(errno));
-        return my_data; //Fail
+        printf("Oh no! %s\n", strerror(errno));
+        /* return my_data; Fail*/
     }
-    if(fscanf(ptr_file, "%i," , &my_data.Columns)) {
+	else if(fscanf(ptr_file, "%i," , &my_data.Columns))
+	{
+        /* i is rows j is columns */
+		int i = 0;
+		int j = 0;
+		char** Maze;
         fscanf(ptr_file, "%i", &my_data.rows);
-        //This is to make it so the numbers are the actual array length we want
-        //Maze2 for example is 0-17 rows in an array but the rows read in as 18
+
+		/*
+		 * This is to make it so the numbers are the actual array length we want
+         * Maze2 for example is 0-17 rows in an array but the rows read in as 18
+		 */
+
         --my_data.rows;
         --my_data.Columns;
         fscanf(ptr_file, " ");
@@ -67,11 +90,9 @@ struct ReadMaze Read_Size(FILE *ptr_file) {
         fscanf(ptr_file, ",");
         fscanf(ptr_file, "%i", &my_data.end[1]);
         fscanf(ptr_file, " ");
-        //Begin reading in maze by allocating memory
-        char** Maze = Create_Maze(my_data);
-        // i is rows j is columns
-        int i = 0;
-        int j = 0;
+
+        /* Begin reading in maze by allocating memory */
+	   	Maze = Create_Maze(my_data);
         while(i <= my_data.rows)
         {
             for (j = 0; j <= my_data.Columns; ++j) {
@@ -87,9 +108,10 @@ struct ReadMaze Read_Size(FILE *ptr_file) {
         printf("\n");
 
         my_data.MazeData = Maze;
-        //Destroyer(Maze, my_data.Columns, my_data.rows);
-        return my_data;
+        /*Destroyer(Maze, my_data.Columns, my_data.rows);*/
+        /*return my_data;*/
     }
+	return my_data;
 }
 
 char** Create_Maze(struct ReadMaze MazeData)
