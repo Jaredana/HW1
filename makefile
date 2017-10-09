@@ -6,3 +6,5 @@ main.o : main.c
 	gcc $(CFLAGS) -c main.c
 clean :
 	rm program main.o
+tempclean :
+	rm input.h~ main.c~

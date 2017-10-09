@@ -21,16 +21,15 @@ void Display(char** Maze, int Columns, int rows);
 
 int main(int argc, char* argv[])
 {
-    FILE *ptr_file = fopen("maze2.txt", "r");
+    FILE *ptr_file1 = fopen("maze2.txt", "r");
     FILE *ptr_file2 = fopen("maze3.txt", "r");
 
-    /* Read in Maze Data temp1 is Maze 1 and temp2 is Maze 2 */
+    /* Read in Maze Data - Maze 1 is maze2.txt and Maze 2 is maze3.txt */
     struct ReadMaze Maze1, Maze2;
-
-    Maze1 = Copy_data(Maze1, Read_Size(ptr_file));
+    Maze1 = Copy_data(Maze1, Read_Size(ptr_file1));
     Maze2 = Copy_data(Maze2, Read_Size(ptr_file2));
 
-    fclose(ptr_file);
+    fclose(ptr_file1);
     fclose(ptr_file2);
 
     /*Display(Maze1.MazeData, Maze1.Columns, Maze1.rows);*/
@@ -64,7 +63,7 @@ struct ReadMaze Read_Size(FILE *ptr_file)
     if (!ptr_file)
     {
         printf("Oh no! %s\n", strerror(errno));
-        /* return my_data; Fail*/
+        /*return my_data; Fail*/
     }
 	else if(fscanf(ptr_file, "%i," , &my_data.Columns))
 	{
@@ -73,14 +72,13 @@ struct ReadMaze Read_Size(FILE *ptr_file)
 		int j = 0;
 		char** Maze;
         fscanf(ptr_file, "%i", &my_data.rows);
-
 		/*
 		 * This is to make it so the numbers are the actual array length we want
          * Maze2 for example is 0-17 rows in an array but the rows read in as 18
 		 */
-
         --my_data.rows;
         --my_data.Columns;
+
         fscanf(ptr_file, " ");
         fscanf(ptr_file, "%i", &my_data.start[0]);
         fscanf(ptr_file, ",");
@@ -95,7 +93,8 @@ struct ReadMaze Read_Size(FILE *ptr_file)
 	   	Maze = Create_Maze(my_data);
         while(i <= my_data.rows)
         {
-            for (j = 0; j <= my_data.Columns; ++j) {
+            for (j = 0; j <= my_data.Columns; ++j)
+			{
                 fscanf(ptr_file, "%c", &Maze[i][j]);
             }
             j = 0;
@@ -118,11 +117,11 @@ char** Create_Maze(struct ReadMaze MazeData)
 {
     int i = 0;
     char** Maze;
-    Maze = (char**)malloc(sizeof(char *) *MazeData.rows);
+    Maze = (char**)malloc(sizeof(char *) * MazeData.rows);
 
     for(i = 0; i <= MazeData.rows; ++i)
     {
-        Maze[i] = (char*)malloc(sizeof(char) *MazeData.Columns);
+        Maze[i] = (char*)malloc(sizeof(char) * MazeData.Columns);
     }
     return Maze;
 }
@@ -131,7 +130,8 @@ void Display(char** Maze, int Columns, int rows)
 {
     int i = 0;
     int j = 0;
-    while(i < rows) {
+    while(i < rows)
+	{
         for (j = 0; j < Columns; ++j) {
             printf("%c", Maze[i][j]);
         }
