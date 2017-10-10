@@ -15,20 +15,19 @@
 
 /* Reads in data from the text file and fills the Maze struct and 2D array */
 struct ReadMaze Read_Size(FILE *ptr_file);
-
 /* Used for allocating memory for the maze's data */
 char** Create_Maze(struct ReadMaze my_data);
-
 /* Maze copy function */
 struct ReadMaze Copy_data(struct ReadMaze my_data, struct ReadMaze TMaze);
-
 /* For Deallocating, his method didn't work... */
 int Destroyer(char** Maze, int Columns, int rows);
-
 /* Works a little weird */
 void Display(char** Maze, int Columns, int rows);
 
-
+/* Main looper for solving the maze */
+void SolveMaze(struct ReadMaze maze);
+/* Swap character in maze to show path */
+int DrawPath(char* spot);
 
 /* This enum will represent which direction the 'solver' is facing */
 enum dir {NORTH, EAST, SOUTH, WEST};
