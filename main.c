@@ -1,26 +1,11 @@
 #include "input.h"
 
-/* FUNCTION DECLARATIONS */
-
-/* Reads in data from the text file and fills the Maze struct and 2D array */
-struct ReadMaze Read_Size(FILE *ptr_file);
-
-/* Used for allocating memory */
-char** Create_Maze(struct ReadMaze my_data);
-
-/* Copy function */
-struct ReadMaze Copy_data(struct ReadMaze my_data, struct ReadMaze TMaze);
-
-/* For Deallocating, his method didn't work... */
-int Destroyer(char** Maze, int Columns, int rows);
-
-/* Works a little weird */
-void Display(char** Maze, int Columns, int rows);
-
-
-
 int main(int argc, char* argv[])
 {
+	/* 
+	 * Possible To-Do: Use command line args to select files
+	 * (Instead of hard-coding the names; more flexible)
+	 */
     FILE *ptr_file1 = fopen("maze2.txt", "r");
     FILE *ptr_file2 = fopen("maze3.txt", "r");
 

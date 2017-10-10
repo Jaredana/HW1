@@ -4,11 +4,31 @@
  */
 
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 #include <errno.h>
 #include <malloc.h>
 /*#include <mem.h> Was throwing errors in Linux */
+
+/*
+ * FUNCTION DECLARATIONS
+ */
+
+/* Reads in data from the text file and fills the Maze struct and 2D array */
+struct ReadMaze Read_Size(FILE *ptr_file);
+
+/* Used for allocating memory for the maze's data */
+char** Create_Maze(struct ReadMaze my_data);
+
+/* Maze copy function */
+struct ReadMaze Copy_data(struct ReadMaze my_data, struct ReadMaze TMaze);
+
+/* For Deallocating, his method didn't work... */
+int Destroyer(char** Maze, int Columns, int rows);
+
+/* Works a little weird */
+void Display(char** Maze, int Columns, int rows);
+
+
 
 /* This enum will represent which direction the 'solver' is facing */
 enum dir {NORTH, EAST, SOUTH, WEST};
