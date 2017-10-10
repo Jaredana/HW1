@@ -7,7 +7,7 @@
 
 int main(int argc, char* argv[])
 {
-	/* 
+	/*
 	 * Possible To-Do: Use command line args to select files
 	 * (Instead of hard-coding the names; more flexible)
 	 */
@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
     fclose(ptr_file1);
     fclose(ptr_file2);
 
-    /*Display(Maze1.MazeData, Maze1.Columns, Maze1.rows);*/
+    Display(Maze1.MazeData, Maze1.Columns, Maze1.rows);
 
     return 0;
 }
