@@ -1,3 +1,9 @@
+/*
+ * Created by Ben Gustafson on 10/9/2017
+ * Written by Jared Dana
+ * Modified by Ben Gustafson
+ */
+
 #include "input.h"
 
 int Destroyer(char** Maze, int Columns, int rows)

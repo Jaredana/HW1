@@ -1,5 +1,5 @@
 /*
- * Created by Jared_Dana on 9/28/2017.
+ * Created by Jared Dana on 9/28/2017
  * Modified by Ben Gustafson
  */
 
@@ -25,12 +25,16 @@ int Destroyer(char** Maze, int Columns, int rows);
 void Display(char** Maze, int Columns, int rows);
 
 /* Main looper for solving the maze */
-void SolveMaze(struct ReadMaze maze);
+int SolveMaze(struct ReadMaze maze);
 /* Swap character in maze to show path */
-int DrawPath(char* spot);
+void DrawPath(char* spot);
+/* Checks the solver's environment to determine action */
+char CheckEnvironment(char fwd, char left, char right, char rear);
+
+
 
 /* This enum will represent which direction the 'solver' is facing */
-enum dir {NORTH, EAST, SOUTH, WEST};
+enum dir {NORTH=0, EAST=1, SOUTH=2, WEST=3};
 
 /*
  * This struct will represent a maze

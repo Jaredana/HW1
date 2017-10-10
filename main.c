@@ -1,3 +1,8 @@
+/*
+ * Created by Jared Dana on 9/28/2017
+ * Modified by Ben Gustafson
+ */
+
 #include "input.h"
 
 int main(int argc, char* argv[])
