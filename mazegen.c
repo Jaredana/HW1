@@ -13,7 +13,6 @@ int Destroyer(char** Maze, int Columns, int rows)
     {
        free(Maze[i]);
     }
-    //free(Maze);
 	return 0;
 }
 
