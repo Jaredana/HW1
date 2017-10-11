@@ -25,9 +25,7 @@ int Destroyer(char** Maze, int Columns, int rows);
 void Display(char** Maze, int Columns, int rows);
 
 /* Main looper for solving the maze */
-int SolveMaze(struct ReadMaze maze);
-/* Swap character in maze to show path */
-void DrawPath(char* spot);
+void SolveMaze(struct ReadMaze maze);
 /* Checks the solver's environment to determine action */
 char CheckEnvironment(char fwd, char left, char right, char rear);
 

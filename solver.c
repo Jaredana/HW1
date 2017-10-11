@@ -4,7 +4,7 @@
 
 #include "input.h"
 
-int SolveMaze(struct ReadMaze maze)
+void SolveMaze(struct ReadMaze maze)
 {
 	struct Solver crawler;
 	int endRow = maze.end[1];
@@ -17,11 +17,10 @@ int SolveMaze(struct ReadMaze maze)
 
 	/* Default value. Updates on loop start */
 	crawler.currentDir = SOUTH;
+	maze.MazeData[crawler.row][crawler.col] = '.';
 
-	while (crawler.row != endRow && crawler.col != endCol)
+	while (!(crawler.row == endRow && crawler.col == endCol))
 	{
-		/* Change the character under the solver to represent the path taken */
-		DrawPath(&(maze.MazeData[crawler.row][crawler.col]));
 		/*
 		 * Assign values from the Maze's data to placeholders; null if at an edge
 		 * (That way, the code to assign them per direction isn't too verbose)
@@ -88,6 +87,11 @@ int SolveMaze(struct ReadMaze maze)
 			case 'R':
 				/* Sets the enum to the next value (clockwise) */
 				crawler.currentDir = (crawler.currentDir + 1) % 4;
+				/* Move the solver based on its direction */
+				if (crawler.currentDir == NORTH) --crawler.row;
+				else if (crawler.currentDir == EAST) ++crawler.col;
+				else if (crawler.currentDir == SOUTH) ++crawler.row;
+				else if (crawler.currentDir == WEST) --crawler.col;
 				break;
 			/* If right is a wall and fwd is open */
 			case 'F':
@@ -110,23 +114,12 @@ int SolveMaze(struct ReadMaze maze)
 			default:
 				break;
 		}
+		/* Change the character under the solver to represent the path taken */
+		maze.MazeData[crawler.row][crawler.col] = '.';
 	}
 	/* Display the solved maze */
 	printf("Maze Solved!\n");
 	Display(maze.MazeData, maze.Columns, maze.rows);
-	return 0;
-}
-
-void DrawPath(char* spot)
-{
-	/*
-	 * As a failsafe, only change a character if it is an empty space in the maze
-	 * (In other words, don't change if a wall or something else)
-	 */
-	if(*spot == '0')
-	{
-		*spot = '.';
-	}
 }
 
 char CheckEnvironment(char fwd, char left, char right, char rear)
