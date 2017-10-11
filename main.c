@@ -23,6 +23,10 @@ int main(int argc, char* argv[])
     fclose(ptr_file2);
 
     Display(Maze1.MazeData, Maze1.Columns, Maze1.rows);
+    printf("\n\n\n");
+    Display(Maze2.MazeData, Maze2.Columns, Maze2.rows);
 
+    Destroyer(Maze1.MazeData, Maze1.Columns, Maze1.rows);
+    Destroyer(Maze2.MazeData, Maze2.Columns, Maze2.rows);
     return 0;
 }

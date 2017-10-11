@@ -8,8 +8,12 @@
 
 int Destroyer(char** Maze, int Columns, int rows)
 {
-    free(Maze);
-	/* Just needs to return something */
+    int i = 0;
+    for(i = 0; i < rows - 1; ++i)
+    {
+       free(Maze[i]);
+    }
+    //free(Maze);
 	return 0;
 }
 
@@ -71,8 +75,7 @@ struct ReadMaze Read_Size(FILE *ptr_file)
         printf("\n");
 
         my_data.MazeData = Maze;
-        /*Destroyer(Maze, my_data.Columns, my_data.rows);*/
-        /*return my_data;*/
+
     }
 	return my_data;
 }
